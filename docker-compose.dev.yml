@@ -1,9 +1,9 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: reservas-db-dev
+    container_name: booking-db-dev
     environment:
-      POSTGRES_DB: reservas
+      POSTGRES_DB: booking
       POSTGRES_USER: demo
       POSTGRES_PASSWORD: secret
     ports:
@@ -11,7 +11,7 @@ services:
     volumes:
       - db-data-dev:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U demo -d reservas"]
+      test: ["CMD-SHELL", "pg_isready -U demo -d booking"]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
       target: dev
-    container_name: reservas-backend-dev
+    container_name: booking-backend-dev
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -33,7 +33,7 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
-    container_name: reservas-nginx-dev
+    container_name: booking-nginx-dev
     ports:
       - "8080:80"
     volumes:
@@ -44,7 +44,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: reservas-rabbitmq-dev
+    container_name: booking-rabbitmq-dev
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -56,7 +56,7 @@ services:
 
   mailcatcher:
     image: sj26/mailcatcher:latest
-    container_name: reservas-mailcatcher-dev
+    container_name: booking-mailcatcher-dev
     ports:
       - "1025:1025"   # SMTP
       - "1080:1080"   # UI web

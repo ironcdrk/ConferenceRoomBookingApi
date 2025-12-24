@@ -1,0 +1,60 @@
+############################################
+# Laravel
+############################################
+/vendor/
+.env
+.env.*
+!.env.example
+
+/storage/*.key
+/storage/app/*
+!/storage/app/public/
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*
+
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+############################################
+# Composer / PHP
+############################################
+composer.lock
+.phpunit.result.cache
+
+############################################
+# Docker
+############################################
+docker-compose.override.yml
+docker-compose.prod.yml
+.docker/
+
+############################################
+# IDEs / OS
+############################################
+.idea/
+.vscode/
+*.iml
+*.swp
+.DS_Store
+Thumbs.db
+
+############################################
+# Logs / Debug
+############################################
+*.log
+xdebug.log
+
+############################################
+# Tests / Coverage
+############################################
+/coverage/
+/reports/
+
+############################################
+# Misc
+############################################
+*.cache
+*.tmp
