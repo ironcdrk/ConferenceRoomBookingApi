@@ -25,7 +25,6 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // Token inmediato (opcional). Si prefieres, quita esto y obliga a hacer login.
         $token = $user->createToken('api')->plainTextToken;
 
         return response()->json([
@@ -54,7 +53,6 @@ class AuthController extends Controller
             ]);
         }
 
-        // Buena práctica: revocar tokens anteriores si quieres “1 sesión por dispositivo”.
         // $user->tokens()->delete();
 
         $token = $user->createToken('api')->plainTextToken;
@@ -83,7 +81,7 @@ class AuthController extends Controller
 
     public function logout(Request $request): JsonResponse
     {
-        // Revoca SOLO el token actual (recomendado)
+        // Revoca SOLO el token actual
         $request->user()->currentAccessToken()?->delete();
 
         return response()->json([
