@@ -20,11 +20,11 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 ARG UID=1000
 ARG GID=1000
 
-RUN addgroup -g ${GID} -S appgroup \
- && adduser -u ${UID} -S appuser -G appgroup
+#RUN addgroup -g ${GID} -S appgroup \
+# && adduser -u ${UID} -S appuser -G appgroup
 
-# Usuario para VS Code / Dev Containers
-RUN adduser -D -s /bin/sh vscode
+RUN addgroup -g ${GID} -S appgroup \
+ && adduser  -u ${UID} -D -s /bin/sh -G appgroup appuser
 
 # =========================
 # DEV stage
