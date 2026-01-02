@@ -23,6 +23,9 @@ ARG GID=1000
 RUN addgroup -g ${GID} -S appgroup \
  && adduser -u ${UID} -S appuser -G appgroup
 
+# Usuario para VS Code / Dev Containers
+RUN adduser -D -s /bin/sh vscode
+
 # =========================
 # DEV stage
 # =========================

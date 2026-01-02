@@ -58,3 +58,6 @@ xdebug.log
 ############################################
 *.cache
 *.tmp
+
+/.github/
+/.devcontainer/
