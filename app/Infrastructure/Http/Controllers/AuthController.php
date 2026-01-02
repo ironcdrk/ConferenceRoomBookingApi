@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Application\Auth\RegisterUserHandler;
+use App\Application\Auth\LoginUserHandler;
 
 class AuthController extends Controller
 {
@@ -22,11 +23,6 @@ class AuthController extends Controller
         ]);
 
         $user = $handler->handle($data);
-        /*$user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);*/
 
         $token = $user->createToken('api')->plainTextToken;
 
@@ -41,20 +37,14 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(Request $request, LoginUserHandler $handler): JsonResponse
     {
         $data = $request->validate([
             'email' => ['required','email'],
             'password' => ['required','string'],
         ]);
 
-        $user = User::where('email', $data['email'])->first();
-
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Credenciales inválidas.'],
-            ]);
-        }
+        $user = $handler->handle($data['email'], $data['password']);
 
         // $user->tokens()->delete();
 
