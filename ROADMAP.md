@@ -2,7 +2,7 @@
 
 ## Phase 1 – Foundations
 Status: 🟡 In Progress
-- Docker environment
+- Docker environment ✅ Completed
 - Laravel API base
 - Auth
 - Health endpoint
